@@ -10,7 +10,8 @@ export default {
       grey: "#4f4f4f",
       mdGrey: "#BDBDBD",
       lightGrey: "#F6F8FB",
-      white: "#ffffff"
+      white: "#ffffff",
+      green: "#219653"
     },
     fontFamily: {
       display: ["Poppins"]
