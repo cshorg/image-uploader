@@ -1,8 +1,9 @@
 import { useContext } from "react"
 import { MainContext } from "../context/Maincontext"
+import axios from "axios"
 
 const Card = () => {
-  const { componentState } = useContext(MainContext)
+  const { componentState, handleUpload } = useContext(MainContext)
 
   return (
     <>
@@ -20,9 +21,18 @@ const Card = () => {
           </div>
           <div className="text-mdGrey mt-[18px]">Or</div>
           <div className="mt-[30px]">
-            <button className="w-[101px] h-[32px] bg-blue rounded-lg text-white text-[12px]">
+            <input
+              onChange={(e) => handleUpload(e.target.files[0])}
+              type="file"
+              id="file"
+            />
+            {/* <label
+              htmlFor="file"
+
+              className="px-[15px] cursor-pointer py-[8px] bg-blue rounded-lg text-white text-[12px]"
+            >
               Choose a file
-            </button>
+            </label> */}
           </div>
         </div>
       )}
