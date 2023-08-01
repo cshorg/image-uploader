@@ -1,6 +1,7 @@
 # basics
 .env
 node_modules
+images
 
 # Editor directories and files
 .vscode/*

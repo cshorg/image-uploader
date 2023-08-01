@@ -5,7 +5,7 @@ export const MainContext = createContext()
 
 export const MainContextProvider = ({ children }) => {
   const [componentState, setComponentState] = useState("card")
-  const [file, setFile] = useState()
+  const [image, setImage] = useState()
 
   const handleUpload = (file) => {
     if (file) {
@@ -14,14 +14,14 @@ export const MainContextProvider = ({ children }) => {
 
       axios
         .post("http://localhost:3001/image/upload", formdata)
-        .then((res) => console.log(res))
+        .then((res) => setImage(res.data.image))
         .catch((err) => console.log(err))
     }
   }
 
   return (
     <MainContext.Provider
-      value={{ componentState, setComponentState, setFile, handleUpload }}
+      value={{ componentState, setComponentState, handleUpload }}
     >
       {children}
     </MainContext.Provider>

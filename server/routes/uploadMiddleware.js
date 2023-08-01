@@ -1,4 +1,4 @@
-const express = require("express")
+const path = require("path")
 const multer = require("multer")
 const { v4: uuidv4 } = require("uuid")
 
@@ -8,7 +8,7 @@ const storage = multer.diskStorage({
   },
   filename: (req, file, cb) => {
     const uniqueString = uuidv4()
-    cb(null, uniqueString)
+    cb(null, uniqueString + path.extname(file.originalname))
   }
 })
 
