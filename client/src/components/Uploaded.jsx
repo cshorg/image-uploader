@@ -3,7 +3,7 @@ import { MainContext } from "../context/Maincontext"
 import { BsFillCheckCircleFill } from "react-icons/bs"
 
 const Uploaded = () => {
-  const { componentState } = useContext(MainContext)
+  const { componentState, image, url } = useContext(MainContext)
 
   return (
     <>
@@ -15,15 +15,31 @@ const Uploaded = () => {
           <div className="text-[18px] text-grey mt-[10px]">
             Uploaded Successfully!
           </div>
-          <div className="w-[338px] h-[225px] bg-blue mt-[25px] rounded-xl"></div>
-          <div className="mt-[25px]">
-            <button className="relative left-[261px] top-[32px] w-[74px] h-[30px] bg-blue rounded-lg text-white text-[10px]">
+          <div className=" mt-[25px] rounded-xl">
+            {image ? (
+              <img
+                className="max-w-[338px] max-h-[225px] object-scale-down "
+                src={`http://localhost:3001/image/${image}`}
+                alt="image"
+              />
+            ) : (
+              <div>error</div>
+            )}
+          </div>
+          <div className="">
+            <button
+              onClick={() => {
+                navigator.clipboard.writeText(url)
+              }}
+              className="relative left-[261px] top-[32px] w-[74px] h-[30px] bg-blue rounded-lg text-white text-[10px]"
+            >
               Copy Link
             </button>
             <input
-              className="text-[10px] outline-none text-[#4F4F4F] pl-2 bg-[#F6F8FB] w-[338px] h-[34px] rounded-lg border-[2px] border-[#E0E0E0]"
+              className="text-[10px] pr-[90px] text-ellipsis outline-none text-[#4F4F4F] pl-2 bg-[#F6F8FB] w-[338px] h-[34px] rounded-lg border-[2px] border-[#E0E0E0]"
               type="text"
-              placeholder="https://testing.com/photo-123o87xcjkzxk"
+              value={url || ""}
+              placeholder="Copy Link"
             />
           </div>
         </div>

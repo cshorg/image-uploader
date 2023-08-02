@@ -3,7 +3,7 @@ import { MainContext } from "../context/Maincontext"
 import axios from "axios"
 
 const Card = () => {
-  const { componentState, handleUpload } = useContext(MainContext)
+  const { componentState, handleUpload, image } = useContext(MainContext)
 
   return (
     <>
@@ -22,17 +22,17 @@ const Card = () => {
           <div className="text-mdGrey mt-[18px]">Or</div>
           <div className="mt-[30px]">
             <input
+              hidden
               onChange={(e) => handleUpload(e.target.files[0])}
               type="file"
               id="file"
             />
-            {/* <label
-              htmlFor="file"
-
+            <label
+              for="file"
               className="px-[15px] cursor-pointer py-[8px] bg-blue rounded-lg text-white text-[12px]"
             >
               Choose a file
-            </label> */}
+            </label>
           </div>
         </div>
       )}

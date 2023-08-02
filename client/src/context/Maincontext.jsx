@@ -1,11 +1,24 @@
-import { createContext, useState } from "react"
+import { createContext, useEffect, useState } from "react"
 import axios from "axios"
 
 export const MainContext = createContext()
 
 export const MainContextProvider = ({ children }) => {
   const [componentState, setComponentState] = useState("card")
-  const [image, setImage] = useState()
+  const [image, setImage] = useState("")
+  const [url, setUrl] = useState("")
+
+  const build = (url) => {
+    setUrl(`http://localhost:3001/image/${url}`)
+    setComponentState("uploaded")
+  }
+
+  const finishUpload = (image) => {
+    setImage(image)
+    setComponentState("upload")
+
+    build(image)
+  }
 
   const handleUpload = (file) => {
     if (file) {
@@ -14,14 +27,14 @@ export const MainContextProvider = ({ children }) => {
 
       axios
         .post("http://localhost:3001/image/upload", formdata)
-        .then((res) => setImage(res.data.image))
+        .then((res) => finishUpload(res.data.image))
         .catch((err) => console.log(err))
     }
   }
 
   return (
     <MainContext.Provider
-      value={{ componentState, setComponentState, handleUpload }}
+      value={{ componentState, setComponentState, handleUpload, image, url }}
     >
       {children}
     </MainContext.Provider>
